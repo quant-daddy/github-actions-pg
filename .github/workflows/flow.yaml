@@ -10,7 +10,7 @@ jobs:
     services:
       postgres:
         image: postgres:13.5-alpine
-        args: ["-c", "max_connections=1000"]
+        options: -c max_connections=1000
         env:
           # The hostname used to communicate with the PostgreSQL service container
           POSTGRES_HOST: localhost

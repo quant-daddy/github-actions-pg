@@ -55,5 +55,8 @@ jobs:
           ECR_REPOSITORY: github-action-test-suraj
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]
+            docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          fi

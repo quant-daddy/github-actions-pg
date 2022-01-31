@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Set foobar to cool
+        uses: mikefarah/yq@master
+        working-directory: test
+        with:
+          cmd: |
+            yq -i '.replicaCount = 2' 'values.yml'
+            yq -i '.image.repository = nonsense' 'values.yml'
       - name: Simple bash script
         uses: ./.github/helm
         env:

@@ -11,4 +11,4 @@ jobs:
       - name: Simple bash script
         uses: ./.github/helm
         env:
-          KUBECONFIGBASE64: "4422"
+          KUBECONFIGBASE64: ${{ secrets.KUBECONFIGBASE64 }}

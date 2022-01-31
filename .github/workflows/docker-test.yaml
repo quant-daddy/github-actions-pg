@@ -12,8 +12,8 @@ jobs:
         uses: mikefarah/yq@master
         with:
           cmd:
-            yq -i '.replicaCount = 2' test/values.yaml
-            # yq -i '.image.repository = nonsense' test/values.yaml
+            "yq -i '.replicaCount = 2' test/values.yaml; yq -i '.image.repository = nonsense' test/values.yaml"
+            #
       - name: Simple bash script
         uses: ./.github/helm
         env:

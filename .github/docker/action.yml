@@ -1,0 +1,5 @@
+name: "My Docker Action"
+description: Simply running a bash command
+runs:
+  using: "docker"
+  main: "Dockerfile"

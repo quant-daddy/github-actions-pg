@@ -3,6 +3,8 @@ on:
   workflow_dispatch:
   push:
     branches: [master]
+    paths:
+      - ".github/**"
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -11,10 +13,14 @@ jobs:
       - name: Set foobar to cool
         uses: mikefarah/yq@master
         with:
-          cmd:
-            'yq -i ''.replicaCount = 2'' test/values.yaml; yq -i ''.image.repository = "nonsense"'' test/values.yaml'
-            #
-      - name: Simple bash script
-        uses: ./.github/helm
-        env:
-          KUBECONFIGBASE64: ${{ secrets.KUBECONFIGBASE64 }}
+          cmd: 'yq -i ''.replicaCount = 2'' test/values.yaml; yq -i ''.image.repository = "nonsense"'' test/values.yaml'
+      - name: Update git
+        uses: EndBug/add-and-commit@v8
+        with:
+          author_name: Author Name
+          author_email: mail@example.com
+          message: "Your commit message"
+      # - name: Simple bash script
+      #   uses: ./.github/helm
+      #   env:
+      #     KUBECONFIGBASE64: ${{ secrets.KUBECONFIGBASE64 }}

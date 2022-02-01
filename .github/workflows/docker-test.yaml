@@ -8,12 +8,13 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    working-directory: test
     steps:
       - uses: actions/checkout@v2
       - name: Set foobar to cool
         uses: mikefarah/yq@master
         with:
-          cmd: 'yq -i ''.replicaCount = 2'' test/values.yaml; yq -i ''.image.repository = "nonsense"'' test/values.yaml'
+          cmd: 'yq -i ''.replicaCount = 2'' values.yaml; yq -i ''.image.repository = "nonsense"'' values.yaml'
       - name: Update git
         uses: EndBug/add-and-commit@v8
         with:
@@ -21,6 +22,6 @@ jobs:
           author_email: mail@example.com
           message: "Your commit message"
       # - name: Simple bash script
-      #   uses: ./.github/helm
-      #   env:
-      #     KUBECONFIGBASE64: ${{ secrets.KUBECONFIGBASE64 }}
+      # uses: ./.github/helm
+      # env:
+      #   KUBECONFIGBASE64: ${{ secrets.KUBECONFIGBASE64 }}
